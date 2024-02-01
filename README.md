@@ -7,10 +7,10 @@
 - 그 밖의 사용한 환경변수를 나열해 주세요.
 
 # API 명세서 URL
-- 구글 Docs 공유 URL 추가
+- [구글 Docs 공유 URL 추가](https://www.notion.so/dc01d47a654a41829936c027990cdea0?v=1b7c44b1ea2443e9815fbd734c8dc6ed&pvs=4)
 
 # ERD URL
-- ERD 작성한 위치 URL 추가
+- [ERD 작성한 위치 URL 추가](https://www.erdcloud.com/d/7uP4bZa5RxdpKXj8n)
 
 # 더 고민해 보기
 1. **암호화 방식**
