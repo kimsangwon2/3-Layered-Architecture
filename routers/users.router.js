@@ -58,7 +58,7 @@ router.post("/sign-in", async (req, res, next) => {
     return res.status(401).json({ message: "비밀번호가 일치하지 않습니다" });
 
   const token = jwt.sign({ userId: user.userId }, "custom-secret-key", {
-    expiresIn: "10s",
+    expiresIn: "12h",
   });
 
   const refreshtoken = jwt.sign({ userId: user.userId }, "custom-secret-key", {
