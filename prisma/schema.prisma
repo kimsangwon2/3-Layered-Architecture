@@ -19,7 +19,7 @@ model Users {
   checkpass String   @map("checkpass")
   name      String   @map("name")
   createdAt DateTime @default(now()) @map("createdAt")
-
+  grade     Grade   @default(USER) @map("grade")
   resume     Resume[]
 
   @@map("Users")
@@ -44,4 +44,8 @@ enum Status{
   INTERVIEW1
   INTERVIEW2
   FINAL_PASS
+}
+enum Grade{
+  USER
+  admin
 }

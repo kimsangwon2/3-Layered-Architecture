@@ -1,15 +1,18 @@
 import jwt from "jsonwebtoken";
 import { prisma } from "../models/index.js";
+import dotenv from "dotenv";
 export default async function (req, res, next) {
   try {
     const { authorization } = req.cookies;
+    dotenv.config();
+    const SECRETKEY = process.env.SECRETKEY;
     if (!authorization)
       throw new Error("요청한 사용자의 토큰이 존재하지 않습니다");
 
     const [tokenType, token] = authorization.split(" ");
     if (tokenType !== "Bearer")
       throw new Error("토큰 타입이 Bearer 형식이 아닙니다");
-    const decodedToken = jwt.verify(token, "custom-secret-key");
+    const decodedToken = jwt.verify(token, SECRETKEY);
     const userId = decodedToken.userId;
 
     const user = await prisma.users.findFirst({
@@ -19,7 +22,7 @@ export default async function (req, res, next) {
       throw new Error("토큰 사용자가 존재하지 않습니다");
     }
 
-    req.user = user;
+    res.locals.user = user;
 
     next();
   } catch (error) {
