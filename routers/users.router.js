@@ -120,15 +120,17 @@ router.get("/kakao/callback", async (req, res, next) => {
         code: req.query.code,
       }),
     });
-    const accessToken = tokenResponse.data.access_token;
-    const refreshToken = tokenResponse.data.refresh_token;
-    return res.status(200).json({
-      access_token: accessToken,
-      refresh_token: refreshToken,
-    });
   } catch (error) {
     res.json(error.data);
   }
+  let user = await axios({
+    method: "get",
+    url: "https://kapi.kakao.com/v2/user/me",
+    headers: {
+      Authorization: `Bearer ${token.data.access_token}`,
+    },
+  });
+  req.seesion.kakao = user.data;
 });
 
 export default router;
