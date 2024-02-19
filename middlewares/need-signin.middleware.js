@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { prisma } from "../models/index.js";
+import { prisma } from "../index.js";
 import dotenv from "dotenv";
 export default async function (req, res, next) {
   try {
@@ -14,16 +14,17 @@ export default async function (req, res, next) {
       throw new Error("토큰 타입이 Bearer 형식이 아닙니다");
     const decodedToken = jwt.verify(token, SECRETKEY);
     const userId = decodedToken.userId;
-
     const user = await prisma.users.findFirst({
       where: { userId: +userId },
     });
+
     if (!user) {
       throw new Error("토큰 사용자가 존재하지 않습니다");
     }
 
-    res.locals.user = user;
-
+    req.user = user;
+    res.cookie("authorization", `Bearer ${accesstoken}`);
+    res.cookie("refreshtoken", `Bearer ${refreshtoken}`);
     next();
   } catch (error) {
     if (error.name === "TokenExpiredError")

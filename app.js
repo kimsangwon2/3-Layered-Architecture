@@ -1,4 +1,5 @@
 import express from "express";
+import "reflect-metadata";
 import cookieParser from "cookie-parser";
 import AuthRouter from "./routers/auth.router.js";
 import ResumeRouter from "./routers/resume.router.js";
