@@ -1,20 +1,18 @@
 // import { jest } from "@jest/globals";
-import { prisma } from "../index.js";
 
 export class ResumeRepository {
-  createResume = async (title, content) => {
-    const createdResume = await prisma.resume.create({
-      data: {
-        title: title,
-        content: content,
-        userId: user.userId,
-      },
+  constructor(prisma) {
+    this.prisma = prisma;
+  }
+  createResume = async (userId, title, content) => {
+    const createdResume = await this.prisma.resume.create({
+      data: { userId, title, content },
     });
     return createdResume;
   };
 
   findAllResume = async (orderKey, orderValue) => {
-    const resumes = await prisma.resume.findMany({
+    const resumes = await this.prisma.resume.findMany({
       include: {
         user: {
           select: {
@@ -29,7 +27,7 @@ export class ResumeRepository {
     return resumes;
   };
   findResumeById = async (resumeId) => {
-    const resume = await prisma.resume.findFirst({
+    const resume = await this.prisma.resume.findFirst({
       where: { resumeId: +resumeId },
       include: {
         user: {
@@ -41,19 +39,21 @@ export class ResumeRepository {
     });
     return resume;
   };
-  updateResume = async (resumeId, title, content, status) => {
-    const updatedResume = await prisma.resume.update({
+  updateResume = async (userId, resumeId, title, content, status, grade) => {
+    const updatedResume = await this.prisma.resume.update({
       where: { resumeId: +resumeId },
       data: {
         title,
         content,
         status,
+        userId,
+        grade,
       },
     });
     return updatedResume;
   };
   deleteResume = async (resumeId, email) => {
-    const deletedResume = await prisma.resume.delete({
+    const deletedResume = await this.prisma.resume.delete({
       where: { resumeId: +resumeId, user: { email } },
     });
     return deletedResume;

@@ -31,26 +31,27 @@ export class UserService {
       grade: createdUser.grade,
     };
   };
-  signinUser = async (userId, email, password) => {
-    dotenv.config();
-    const SECRETKEY = process.env.SECRETKEY;
-    const SECRET_KEY = process.env.SECRET_KEY;
-    const accesstoken = jwt.sign({ userId: +userId }, SECRETKEY, {
-      expiresIn: "12h",
-    });
-    const refreshtoken = jwt.sign({ userId: +userId }, SECRET_KEY, {
-      expiresIn: "7d",
-    });
-
-    const signinUser = await this.userRepository.signinUser(
-      userId,
-      email,
-      password,
+  signinUser = async (email, password) => {
+    const user = await this.userRepository.findEmail(email);
+    const accesstoken = jwt.sign(
+      { userId: user.userId },
+      process.env.SECRETKEY,
+      {
+        expiresIn: "12h",
+      },
     );
+    const refreshtoken = jwt.sign(
+      { userId: user.userId },
+      process.env.SECRET_KEY,
+      {
+        expiresIn: "7d",
+      },
+    );
+
+    const signinUser = await this.userRepository.signinUser(email, password);
     return {
-      email: signinUser.email,
-      password: signinUser.password,
-      userId: signinUser.userId,
+      accesstoken,
+      refreshtoken,
     };
   };
   findAllUser = async () => {

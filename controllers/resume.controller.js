@@ -1,18 +1,18 @@
 // import { jest } from "@jest/globals";
-import { ResumeService } from "../services/resume.service.js";
 export class ResumeController {
-  resumeService = new ResumeService();
-
+  constructor(resumeService) {
+    this.resumeService = resumeService;
+  }
   createResume = async (req, res, next) => {
     try {
       const { title, content } = req.body;
       const { userId } = req.user;
       const createdResume = await this.resumeService.createResume(
+        userId,
         title,
         content,
-        userId,
       );
-      return res.status(201).json({ message: "이력서가 생성되었습니다" });
+      return res.status(201).json({ data: createdResume });
     } catch (err) {
       next(err);
     }
@@ -42,7 +42,11 @@ export class ResumeController {
   updateResume = async (req, res, next) => {
     try {
       const { title, content, status } = req.body;
+      const { userId } = req.user;
+      const { resumeId } = req.params;
       const updatedResume = await this.resumeService.updateResume(
+        userId,
+        resumeId,
         title,
         content,
         status,
@@ -56,10 +60,11 @@ export class ResumeController {
   deleteResume = async (req, res, next) => {
     try {
       const { resumeId } = req.params;
-      const { email } = res.locals.user;
+      const { email, grade } = req.user;
       const deletedResume = await this.resumeService.deleteResume(
         resumeId,
         email,
+        grade,
       );
       return res.status(200).json({ data: deletedResume });
     } catch (err) {

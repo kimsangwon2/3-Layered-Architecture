@@ -1,7 +1,6 @@
 // import { jest } from "@jest/globals";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import authMiddleware from "../middlewares/need-signin.middleware.js";
 import axios from "axios";
 import { UserService } from "../services/user.service.js";
 export class UserController {
@@ -29,6 +28,8 @@ export class UserController {
       const { email, password } = req.body;
       const { userId } = req.params;
       const users = await this.userService.signinUser(email);
+      res.cookie("authorization", `Bearer ${users.accesstoken}`);
+      res.cookie("refreshToken", users.refreshtoken);
       return res.status(200).json({ data: users });
     } catch (err) {
       next(err);

@@ -13,7 +13,7 @@ const PORT = 3018;
 app.use(LogMiddleware);
 app.use(express.json());
 app.use(cookieParser());
-app.use("/api", [AuthRouter, ResumeRouter, UserRouter]);
+app.use("/api", [ResumeRouter, UserRouter, AuthRouter]);
 app.use(ErrorHandlingMiddleware);
 
 app.listen(PORT, () => {

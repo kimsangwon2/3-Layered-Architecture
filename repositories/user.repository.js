@@ -47,5 +47,6 @@ export class UserRepository {
     const findemail = await prisma.users.findFirst({
       where: { email: email },
     });
+    return findemail;
   };
 }
