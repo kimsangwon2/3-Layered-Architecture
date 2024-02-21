@@ -1,4 +1,3 @@
-// import { jest } from "@jest/globals";
 export class ResumeService {
   constructor(resumeRepository) {
     this.resumeRepository = resumeRepository;
@@ -24,7 +23,7 @@ export class ResumeService {
     if (orderKey && orderValue.toLowerCase() === "desc") orderValue ?? "desc";
     const resumes = await this.resumeRepository.findAllResume(
       orderKey,
-      orderValue.toLowerCase(),
+      orderValue ? orderValue.toLowerCase() : undefined,
     );
     return resumes.map((resumes) => {
       return {

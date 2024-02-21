@@ -1,10 +1,13 @@
 import express from "express";
-// import { jest } from "@jest/globals";
 import { prisma } from "../index.js";
 import { UserController } from "../controllers/user.controller.js";
+import { UserRepository } from "../repositories/user.repository.js";
+import { UserService } from "../services/user.service.js";
 
 const router = express.Router();
-const userController = new UserController();
+const userRepository = new UserRepository(prisma);
+const userService = new UserService(userRepository);
+const userController = new UserController(userService);
 
 //회원가입 API
 router.post("/sign-up", userController.createUser);

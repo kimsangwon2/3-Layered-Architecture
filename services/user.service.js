@@ -1,9 +1,8 @@
-// import { jest } from "@jest/globals";
-import { UserRepository } from "../repositories/user.repository.js";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 export class UserService {
-  userRepository = new UserRepository();
+  constructor(userRepository) {
+    this.userRepository = userRepository;
+  }
 
   createUser = async (email, password, checkpass, name, grade) => {
     const isExistUser = await this.userRepository.findEmail({});

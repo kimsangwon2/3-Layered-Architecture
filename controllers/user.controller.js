@@ -1,14 +1,13 @@
-// import { jest } from "@jest/globals";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import axios from "axios";
-import { UserService } from "../services/user.service.js";
 export class UserController {
-  userService = new UserService();
+  constructor(userService) {
+    this.userService = userService;
+  }
 
   createUser = async (req, res, next) => {
     try {
       const { email, password, checkpass, name, grade } = req.body;
+      if (!email || !password || !checkpass || !name || !grade)
+        throw new Error("Invalid Params Error");
 
       const createdUser = await this.userService.createUser(
         email,
@@ -17,7 +16,7 @@ export class UserController {
         name,
         grade,
       );
-      return res.status(200).json({ data: createdUser });
+      return res.status(201).json({ data: createdUser });
     } catch (err) {
       next(err);
     }

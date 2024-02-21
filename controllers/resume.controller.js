@@ -1,4 +1,3 @@
-// import { jest } from "@jest/globals";
 export class ResumeController {
   constructor(resumeService) {
     this.resumeService = resumeService;
@@ -7,6 +6,7 @@ export class ResumeController {
     try {
       const { title, content } = req.body;
       const { userId } = req.user;
+      if (!title || !content) throw new Error("InvalidParamsError");
       const createdResume = await this.resumeService.createResume(
         userId,
         title,

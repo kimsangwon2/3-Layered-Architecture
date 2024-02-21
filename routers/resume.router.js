@@ -1,5 +1,3 @@
-// src/routes/posts.router.js
-
 import express from "express";
 import { prisma } from "../index.js";
 import { ResumeController } from "../controllers/resume.controller.js";
@@ -9,7 +7,6 @@ import { authMiddleware } from "../middlewares/need-signin.middleware.js";
 
 const router = express.Router();
 
-// PostsController의 인스턴스를 생성합니다.
 const resumeRepository = new ResumeRepository(prisma);
 const resumeService = new ResumeService(resumeRepository);
 const resumeController = new ResumeController(resumeService);

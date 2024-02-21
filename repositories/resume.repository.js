@@ -1,5 +1,3 @@
-// import { jest } from "@jest/globals";
-
 export class ResumeRepository {
   constructor(prisma) {
     this.prisma = prisma;
