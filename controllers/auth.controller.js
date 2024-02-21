@@ -11,6 +11,11 @@ export class AuthController {
       const { refreshtoken } = req.body;
       const { userId } = req.user;
       const token = jwt.verify(refreshtoken, process.env.SECRET_KEY);
+
+      const redis = await redisCache.get(`REFRESH_TOKEN:${token.userId}`);
+      if (!redis || redis !== refreshtoken)
+        throw new Error("토큰 정보가 올바르지 않습니다");
+
       const newaccesstoken = jwt.sign(
         { userId: +userId },
         process.env.SECRETKEY,

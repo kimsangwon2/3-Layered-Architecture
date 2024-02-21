@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { redisCache } from "../redis/index.js";
 export class UserService {
   constructor(userRepository) {
     this.userRepository = userRepository;
@@ -46,6 +47,9 @@ export class UserService {
         expiresIn: "7d",
       },
     );
+
+    await redisCache.set(`REFRESH_TOKEN:${user.userId}`, refreshtoken);
+
     return {
       accesstoken,
       refreshtoken,

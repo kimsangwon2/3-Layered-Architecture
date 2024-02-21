@@ -1,5 +1,4 @@
 import express from "express";
-// import { jest } from "@jest/globals";
 import { AuthController } from "../controllers/auth.controller.js";
 import { AuthService } from "../services/auth.sevice.js";
 import { authMiddleware } from "../middlewares/need-signin.middleware.js";
