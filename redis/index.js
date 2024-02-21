@@ -6,7 +6,4 @@ redisCache = Cache.create("redis", {
   host: process.env.REDIS_HOST,
   db: 0,
   ttl: 60 * 1000,
-  connectTimeout: 5000,
-  enableOfflineQueue: false, // 오프라인 큐 비활성화
-  showFriendlyErrorStack: true,
 });

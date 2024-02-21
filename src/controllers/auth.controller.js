@@ -1,6 +1,6 @@
-// import { jest } from "@jest/globals";
 import jwt from "jsonwebtoken";
 import axios from "axios";
+import { redisCache } from "../../../redis/index.js";
 export class AuthController {
   constructor(authService) {
     this.authService = authService;
