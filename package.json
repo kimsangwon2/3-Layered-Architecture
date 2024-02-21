@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.8.1",
+    "@slack/web-api": "^7.0.2",
     "@types/node": "^20.11.19",
     "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
@@ -22,6 +23,7 @@
     "init": "^0.1.2",
     "jsonwebtoken": "^9.0.2",
     "mysql": "^2.18.1",
+    "node-schedule": "^2.1.1",
     "prisma": "^5.8.1",
     "reflect-metadata": "^0.2.1",
     "ts-node": "^10.9.2",

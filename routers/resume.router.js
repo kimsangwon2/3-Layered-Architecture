@@ -4,6 +4,9 @@ import { ResumeController } from "../controllers/resume.controller.js";
 import { ResumeRepository } from "../repositories/resume.repository.js";
 import { ResumeService } from "../services/resume.service.js";
 import { authMiddleware } from "../middlewares/need-signin.middleware.js";
+import { WebClient } from "@slack/web-api";
+import schedule from "node-schedule";
+import { slackbot } from "../slackbot.js";
 
 const router = express.Router();
 
@@ -11,8 +14,12 @@ const resumeRepository = new ResumeRepository(prisma);
 const resumeService = new ResumeService(resumeRepository);
 const resumeController = new ResumeController(resumeService);
 
+const token = process.env.SLACK_TOKEN;
+const channel = process.env.SLACK_CHANNEL;
+const slackBot = new WebClient(token);
+
 /** 이력서 조회 API **/
-router.get("/resume", authMiddleware, resumeController.getResumes);
+router.get("/resume", authMiddleware, slackbot, resumeController.getResumes);
 
 /** 이력서 상세 조회 API **/
 router.get("/resume/:resumeId", authMiddleware, resumeController.getResumeById);
