@@ -25,8 +25,7 @@ export class UserController {
   signinUser = async (req, res, next) => {
     try {
       const { email, password } = req.body;
-      const { userId } = req.params;
-      const users = await this.userService.signinUser(email);
+      const users = await this.userService.signinUser(email, password);
       res.cookie("authorization", `Bearer ${users.accesstoken}`);
       res.cookie("refreshToken", users.refreshtoken);
       return res.status(200).json({ data: users });

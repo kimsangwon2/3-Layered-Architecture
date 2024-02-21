@@ -1,17 +1,11 @@
-// schedule.scheduleJob(scheduling - type, callback);
-export const slackbot = async () => {
+import { WebClient } from "@slack/web-api";
+const token = process.env.SLACK_TOKEN;
+const channel = process.env.SLACK_CHANNEL;
+const slackBot = new WebClient(token);
+export const sendTodayData = async () => {
   try {
-    function createrandomtime(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    const randomtime = createrandomtime(0, 5);
-
-    const slackJob = schedule.scheduleJob(randomtime, 0, 0, 0, 0, 0, () => {
-      console.log("schedule is executed");
-    });
-    const message = "테스트";
-    await slackbot.chat.postMessage({
+    const message = "요청이 처리되었습니다.";
+    await slackBot.chat.postMessage({
       channel: channel,
       text: message,
     });

@@ -1,3 +1,5 @@
+import { sendTodayData } from "../slackbot.js";
+
 export class ResumeService {
   constructor(resumeRepository) {
     this.resumeRepository = resumeRepository;
@@ -25,6 +27,7 @@ export class ResumeService {
       orderKey,
       orderValue ? orderValue.toLowerCase() : undefined,
     );
+    // await sendTodayData();
     return resumes.map((resumes) => {
       return {
         userId: resumes.userId,

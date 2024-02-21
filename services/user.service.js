@@ -46,8 +46,6 @@ export class UserService {
         expiresIn: "7d",
       },
     );
-
-    const signinUser = await this.userRepository.signinUser(email, password);
     return {
       accesstoken,
       refreshtoken,
