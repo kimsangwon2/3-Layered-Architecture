@@ -28,13 +28,13 @@ export default new EntitySchema({
       type: "datetime",
     },
   },
-  relations: {
-    users: {
-      target: "Users",
-      type: "many-to-one",
-      joinTable: true,
-      joinColumn: { name: "userId" },
-      cascade: true,
-    },
-  },
+  // relations: {
+  //   users: {
+  //     target: "Users",
+  //     type: "many-to-one",
+  //     joinTable: true,
+  //     joinColumn: { name: "userId" },
+  //     cascade: true,
+  //   },
+  // },
 });

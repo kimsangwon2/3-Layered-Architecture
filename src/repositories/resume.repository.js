@@ -1,4 +1,4 @@
-import { dataSource } from "../typeorm/index.js";
+// import { dataSource } from "../typeorm/index.js";
 import { sendTodayData } from "../../slackbot.js";
 
 export class ResumeRepository {
@@ -37,8 +37,21 @@ export class ResumeRepository {
     return resumes;
   };
   findResumeById = async (resumeId) => {
-    // const resume = await this.prisma.resume.findFirst({
-    //   where: { resumeId: +resumeId },
+    const resume = await this.prisma.resume.findFirst({
+      where: { resumeId: +resumeId },
+      include: {
+        user: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+    // typeORM 테스트
+    // const resume = await dataSource.getRepository("Resume").findOne({
+    //   where: {
+    //     resumeId: +resumeId,
+    //   },
     //   include: {
     //     user: {
     //       select: {
@@ -47,19 +60,6 @@ export class ResumeRepository {
     //     },
     //   },
     // });
-    const resume = await dataSource.getRepository("Resume").findOne(
-      resumeId,
-      // where: {
-      //   resumeId: +resumeId,
-      // },
-      // include: {
-      //   user: {
-      //     select: {
-      //       name: true,
-      //     },
-      //   },
-      // },
-    );
     return resume;
   };
   updateResume = async (userId, resumeId, title, content, status, grade) => {

@@ -5,7 +5,7 @@ import ResumeEntity from "./entity/resume.entity.js";
 
 export const dataSource = new DataSource({
   type: "mysql",
-  host: process.env.HOST,
+  host: "express-database.czcsgiyymbuq.ap-northeast-2.rds.amazonaws.com",
   port: process.env.PORT,
   username: process.env.USERNAME,
   password: process.env.PASSWORD,
@@ -13,4 +13,14 @@ export const dataSource = new DataSource({
   synchronize: false,
   entities: [UserEntity, ResumeEntity],
 });
-// dataSource.initialize();
+// export const dataSource = new DataSource({
+//   type: "mysql",
+//   host: "express-database.czcsgiyymbuq.ap-northeast-2.rds.amazonaws.com",
+//   port: 3306,
+//   username: "root",
+//   password: "aaaa4321",
+//   database: "resume",
+//   synchronize: false,
+//   entities: [ResumeEntity],
+// });
+dataSource.initialize();
