@@ -1,8 +1,8 @@
 import express from "express";
-import { prisma } from "../index.js";
-import { UserController } from "../src/services/controllers/user.controller.js";
-import { UserRepository } from "../src/services/repositories/user.repository.js";
-import { UserService } from "../src/services/user.service.js";
+import { prisma } from "../../index.js";
+import { UserController } from "../controllers/user.controller.js";
+import { UserRepository } from "../repositories/user.repository.js";
+import { UserService } from "../services/user.service.js";
 
 const router = express.Router();
 const userRepository = new UserRepository(prisma);

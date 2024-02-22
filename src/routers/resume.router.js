@@ -1,9 +1,9 @@
 import express from "express";
-import { prisma } from "../index.js";
+import { prisma } from "../../index.js";
 import { ResumeController } from "../controllers/resume.controller.js";
 import { ResumeRepository } from "../repositories/resume.repository.js";
 import { ResumeService } from "../services/resume.service.js";
-import { authMiddleware } from "../middlewares/need-signin.middleware.js";
+import { authMiddleware } from "../../middlewares/need-signin.middleware.js";
 
 const router = express.Router();
 

@@ -1,7 +1,7 @@
 import express from "express";
 import { AuthController } from "../controllers/auth.controller.js";
 import { AuthService } from "../services/auth.sevice.js";
-import { authMiddleware } from "../middlewares/need-signin.middleware.js";
+import { authMiddleware } from "../../middlewares/need-signin.middleware.js";
 
 const router = express.Router();
 const authController = new AuthController();

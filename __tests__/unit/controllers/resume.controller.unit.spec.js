@@ -1,5 +1,5 @@
 import { jest } from "@jest/globals";
-import { ResumeController } from "../../../controllers/resume.controller.js";
+import { ResumeController } from "../../../src/controllers/resume.controller.js";
 const mockResumeService = {
   findAllResume: jest.fn(),
   findResumeById: jest.fn(),

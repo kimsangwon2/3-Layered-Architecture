@@ -1,9 +1,9 @@
 import express from "express";
 import "reflect-metadata";
 import cookieParser from "cookie-parser";
-import AuthRouter from "./routers/auth.router.js";
-import ResumeRouter from "./routers/resume.router.js";
-import UserRouter from "./routers/users.router.js";
+import AuthRouter from "./src/routers/auth.router.js";
+import ResumeRouter from "./src/routers/resume.router.js";
+import UserRouter from "./src/routers/users.router.js";
 import LogMiddleware from "./middlewares/log.middleware.js";
 import ErrorHandlingMiddleware from "./middlewares/error-handling.middleware.js";
 

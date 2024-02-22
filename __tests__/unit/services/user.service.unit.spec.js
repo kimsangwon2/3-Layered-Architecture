@@ -1,5 +1,5 @@
 import { jest } from "@jest/globals";
-import { UserService } from "../../../services/user.service";
+import { UserService } from "../../../src/services/user.service";
 
 let mockUserRepository = {
   createUser: jest.fn(),

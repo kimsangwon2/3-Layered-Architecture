@@ -1,5 +1,5 @@
 import { jest } from "@jest/globals";
-import { ResumeRepository } from "../../../repositories/resume.repository";
+import { ResumeRepository } from "../../../src/repositories/resume.repository";
 
 let mockPrisma = {
   resume: {

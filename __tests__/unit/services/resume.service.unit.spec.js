@@ -1,5 +1,5 @@
 import { jest } from "@jest/globals";
-import { ResumeService } from "../../../services/resume.service";
+import { ResumeService } from "../../../src/services/resume.service";
 
 let mockResumeRepository = {
   findAllResume: jest.fn(),

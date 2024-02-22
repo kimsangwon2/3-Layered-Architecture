@@ -1,3 +1,4 @@
+import { dataSource } from "../typeorm/index.js";
 export class ResumeRepository {
   constructor(prisma) {
     this.prisma = prisma;
@@ -25,8 +26,20 @@ export class ResumeRepository {
     return resumes;
   };
   findResumeById = async (resumeId) => {
-    const resume = await this.prisma.resume.findFirst({
-      where: { resumeId: +resumeId },
+    // const resume = await this.prisma.resume.findFirst({
+    //   where: { resumeId: +resumeId },
+    //   include: {
+    //     user: {
+    //       select: {
+    //         name: true,
+    //       },
+    //     },
+    //   },
+    // });
+    const resume = await dataSource.getRepository("Resume").findOne({
+      where: {
+        resumeId: +resumeId,
+      },
       include: {
         user: {
           select: {

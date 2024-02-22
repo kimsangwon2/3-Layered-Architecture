@@ -1,5 +1,5 @@
 import { jest } from "@jest/globals";
-import { UserController } from "../../../controllers/user.controller.js";
+import { UserController } from "../../../src/controllers/user.controller.js";
 const mockUserService = {
   signinUser: jest.fn(),
   findAllUser: jest.fn(),
