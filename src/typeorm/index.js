@@ -6,11 +6,11 @@ import ResumeEntity from "./entity/resume.entity.js";
 export const dataSource = new DataSource({
   type: "mysql",
   host: process.env.HOST,
-  port: process.env.POST,
+  port: process.env.PORT,
   username: process.env.USERNAME,
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
   synchronize: false,
   entities: [UserEntity, ResumeEntity],
 });
-dataSource.initialize();
+// dataSource.initialize();

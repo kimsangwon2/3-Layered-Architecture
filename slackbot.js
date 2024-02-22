@@ -1,4 +1,5 @@
 import { WebClient } from "@slack/web-api";
+
 const token = process.env.SLACK_TOKEN;
 const channel = process.env.SLACK_CHANNEL;
 const slackBot = new WebClient(token);
